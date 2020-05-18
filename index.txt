@@ -9,6 +9,8 @@ function fragmentFromString(strHTML) {
 ####################################################
 select element using attributes.
 
-document.querySelectorAll("input[name*='-text']")
+document.querySelectorAll("input[name*='-text']"). ::: contains
+document.querySelectorAll("input[name^='-text']"). ::: starts with
+document.querySelectorAll("input[name$='-text']") ::: ends with
 
 ####################################################
