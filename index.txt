@@ -7,3 +7,8 @@ function fragmentFromString(strHTML) {
     return temp.content;
 }
 ####################################################
+select element using attributes.
+
+document.querySelectorAll("input[name*='-text']")
+
+####################################################
