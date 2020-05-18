@@ -1,4 +1,4 @@
-
+####################################################
 Create element using string literals 
 
 function fragmentFromString(strHTML) {
@@ -6,3 +6,4 @@ function fragmentFromString(strHTML) {
     temp.innerHTML = strHTML;
     return temp.content;
 }
+####################################################
