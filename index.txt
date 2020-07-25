@@ -32,3 +32,148 @@ document.querySelectorAll("input[name^='-text']"). ::: starts with
 document.querySelectorAll("input[name$='-text']") ::: ends with
 
 ####################################################
+Checkbox element : 
+
+
+
+createAndBindCheckboxList() {
+        let config = {
+            weatherType: ['sunny', 'cloudy', 'cold'],
+            filters :{
+                sunny : true,
+                cloudy : false,
+                cold : true
+            }
+        }
+        let frag = document.createDocumentFragment();
+        config.weatherType.forEach((str, ind) => {
+            // form-check-inline : use this class if want inline styling
+            let strHTML = `
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="" id=${str.toLowerCase()} name="${str.toLowerCase()}">
+                    <label class="form-check-label" for=${str.toLowerCase()}>
+                        ${str}
+                    </label>
+                </div>`;
+            
+            var temp = document.createElement('template');
+            temp.innerHTML = strHTML;
+            let el = temp.content.querySelectorAll('input')[0];
+            el.checked = config.filters[str.toLowerCase()];
+            el.addEventListener("click", (e)=>{
+                config.filters[e.target.name] = e.target.checked;
+                console.log('Element checked :', e.target.checked , 'name : ', e.target.name , config.filters);
+            });
+            frag.append(temp.content);
+        });
+        document.getElementsByClassName("checkbox-list")[0].append(frag);
+    }
+
+
+####################################################
+radio element : 
+
+createAndBindRadioList() {
+        let config = {
+            weatherType: ['sunny', 'cloudy', 'cold'],
+            val :'cold'
+        }
+        let frag = document.createDocumentFragment();
+        config.weatherType.forEach((str) => {
+            // form-check-inline : use this class if want inline styling
+            let strHTML = `
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value=${str} id=${str.toLowerCase()+'radio'} name="checkbox-name">
+                    <label class="form-check-label" for=${str.toLowerCase()+'radio'}>
+                        ${str}
+                    </label>
+                </div>`;
+            
+            var temp = document.createElement('template');
+            temp.innerHTML = strHTML;
+            let el = temp.content.querySelectorAll('input')[0];
+            el.checked = config.val === str ? true : false;
+            el.addEventListener("click", (e)=>{
+                config.val = e.target.value;    
+                console.log('Element checked :', e.target.checked , 'name : ', e.target.value ,config);
+
+            });
+            frag.append(temp.content);
+        });
+        document.getElementsByClassName("radio-list")[0].append(frag);
+    }
+    
+    
+####################################################
+select element : 
+
+
+createAndBindSelectList() {
+        let config = {
+            filters :{
+                sunny : 'sunny display',
+                cloudy : 'cloudy display',
+                cold : 'cold display'
+            },
+            val : 'cloudy'
+        }
+
+        let firstPart = `
+                    <div class="form-group">
+                    <label for="exampleFormControlSelect1">Example select</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option value=''>Select</option>`
+        Object.keys(config.filters).forEach((str) => {
+            firstPart+= `<option value=${str}>${config.filters[str]}</option>`;
+        });
+
+        let strHTML = firstPart+"</select> </div>";
+
+        let frag = document.createDocumentFragment();
+        var temp = document.createElement('template');
+        temp.innerHTML = strHTML;
+        let el = temp.content.querySelectorAll('select')[0];
+        el.addEventListener("input", (e)=>{
+            config.val=e.target.value;
+            console.log('Element id : ', e.target.id , config.val);
+        });
+        frag.append(temp.content);
+        document.getElementsByClassName("select-list")[0].append(frag);
+    }
+    
+
+####################################################
+input element : 
+
+
+createAndBindInputList() {
+        let config = {
+            filters :{
+                sunny : 'sunny case',
+                cloudy : '',
+                cold : 'cold case'
+            }
+        }
+        let frag = document.createDocumentFragment();
+        Object.keys(config.filters).forEach((str) => {
+            // form-check-inline : use this class if want inline styling
+            let strHTML = `
+                <div class="form-group ">
+                    <label for="${str}input">${str} label</label>
+                    <input type="text" class="form-control" id="${str}input" placeholder="Example input" value="${config.filters[str]}">
+                </div>`;
+            
+            var temp = document.createElement('template');
+            temp.innerHTML = strHTML;
+            let el = temp.content.querySelectorAll('input')[0];
+            el.addEventListener("input", (e)=>{
+                config.filters[str]=e.target.value
+                console.log('Element id : ', e.target.id , config.filters);
+            });
+            frag.append(temp.content);
+        });
+        document.getElementsByClassName("input-list")[0].append(frag);
+    }
+    
+    
+    
