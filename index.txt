@@ -6,6 +6,24 @@ function fragmentFromString(strHTML) {
     temp.innerHTML = strHTML;
     return temp.content;
 }
+
+function createHTMLElementUsingStr(data){
+        let strHTML = `
+            <div class="fl-row border boxwidth">
+            <div  class="fl-row fl-col space" >
+                <p >${data.name}</p>
+                <p>${data.type}</p>
+            </div>
+            <div class=" fl-row fl-align space">
+                <h2 class="red">${data.temperature} <span class="black fnt-20">C</span> </h2>
+            </div>
+            </div>
+        `;
+        let docFrag = document.createDocumentFragment();
+        docFrag.append(fragmentFromString(strHTML));
+}
+    
+    
 ####################################################
 select element using attributes.
 
